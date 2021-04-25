@@ -1,6 +1,6 @@
-package com.template
+package com.template.clients
 
-import com.template.flows.CreateCashFlow
+import com.template.clients
 import com.template.states.CashState
 import net.corda.client.rpc.CordaRPCClient
 import net.corda.core.contracts.StateRef
@@ -29,7 +29,8 @@ class Client {
         val transactionId = proxy.startFlowDynamic(CreateCashFlow::class.java, value).returnValue.get()
         println("returned transaction Id: $transactionId")
         println("-------------------------------------------")
-        val criteria: QueryCriteria = QueryCriteria.VaultQueryCriteria(StateStatus.ALL,setOf(CashState::class.java), listOf(StateRef(transactionId, 0)))
+        val criteria: QueryCriteria = QueryCriteria.VaultQueryCriteria(StateStatus.ALL,setOf(CashState), listOf(StateRef(transactionId, 0)))
+
         val states = proxy.vaultQueryByCriteria(criteria, CashState::class.java).states
         require(states.isNotEmpty()) {
             "There is no specific CashState" +

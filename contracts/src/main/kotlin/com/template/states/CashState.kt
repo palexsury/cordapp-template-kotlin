@@ -16,4 +16,9 @@ class CashState(var value: Int,
 class CashState (val value: Int,
                  val owner: Party) : ContractState {
     override val participants: List<AbstractParty> get() = listOf(owner)
+
+    override fun toString(): String {
+        return "value: $value" +
+                "owner: $owner"
+    }
 }
