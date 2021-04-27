@@ -39,6 +39,8 @@ class SendCashFlow(private val txHash: SecureHash, private val index: Int, priva
         require(index >= 0) {
             "The index must be non negative."
         }
+        /*val criteria = QueryCriteria.VaultQueryCriteria(stateRefs = listOf(StateRef(txHash, index)))
+        val inputState = serviceHub.vaultService.queryBy<CashState>(criteria).states.single()*/
         val criteria = QueryCriteria.VaultQueryCriteria(
                 Vault.StateStatus.UNCONSUMED,
                 setOf(CashState::class.java),
